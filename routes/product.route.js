@@ -10,6 +10,7 @@ router.route('/')
 router.route('/bulk-update').patch(productController.bulkUpdateProducts)
 
 router.route('/:id').patch(productController.updateProduct)
+.delete(productController.deleteProductById)
 
 
 
