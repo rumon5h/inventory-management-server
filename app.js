@@ -88,6 +88,9 @@ productSchema.pre('save', function(next) {
 //     next();
 // })
 
+productSchema.methods.logger= function(){
+    console.log(`Data save for ${this.name}`);
+}
 // Model 
 const Product = mongoose.model('product', productSchema)
 
@@ -103,6 +106,7 @@ app.post('/api/v1/product', async(req, res, next) => {
     try{
         // If I don't want to change anything
         const result = await Product.create(req.body);
+        result.logger()
 
         // If I want to change any properties of the product
         // const product = await new Product(req.body);
@@ -116,6 +120,46 @@ app.post('/api/v1/product', async(req, res, next) => {
     }
     catch(error){
         res.status(404).json({
+            status: 'Failed',
+            message: 'Something went wrong',
+            error: error.message
+        })
+    }
+});
+
+app.get('/api/v1/product', async(req,res, next) => {
+    try {
+        // To get specific product
+        // const product = await Product.find({_id: '639feb8c48f4bf4c6e071b45'});
+
+        // To get all products
+        // const products = await Product.find({});
+
+        // To get only in-stock products
+        // const products = await Product.find({status: {$ne: 'out-of-stock'}});
+
+        // To get only name and quantity 
+        // const products = await Product.find({}, 'name quantity');
+
+        // To get without name and quantity
+        // const products = await Product.find({}, '-name -quantity');
+
+        // Advantage of using mongoose
+        // const products = await Product.where('name').equals(/\w/)
+        // .where('quantity').gt(50).lt(600)
+        // .limit(2).sort({quantity: -1});
+
+        // To get specific one product
+        // const product = await Product.findById('639feb8c48f4bf4c6e071b');
+
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Successfully get the products',
+            data: products
+        })
+    } catch (error) {
+        res.status(400).json({
             status: 'Failed',
             message: 'Something went wrong',
             error: error.message
