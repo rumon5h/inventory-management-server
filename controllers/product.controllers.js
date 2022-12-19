@@ -1,12 +1,14 @@
-const Product = require("../models/Product")
+const { 
+    getProductsService, 
+    createProductService, 
+    updateProductService 
+} = require("../services/product.services");
+
 
 exports.getProducts = async(req,res, next) => {
     try {
         // To get specific product
         // const product = await Product.find({_id: '639feb8c48f4bf4c6e071b45'});
-
-        // To get all products
-        const products = await Product.find({});
 
         // To get only in-stock products
         // const products = await Product.find({status: {$ne: 'out-of-stock'}});
@@ -25,6 +27,8 @@ exports.getProducts = async(req,res, next) => {
         // To get specific one product
         // const product = await Product.findById('639feb8c48f4bf4c6e071b');
 
+        // To get all products
+        const products = await getProductsService();
 
         res.status(200).json({
             status: 'success',
@@ -44,7 +48,7 @@ exports.createProduct = async(req, res, next) => {
     // Save or create product
     try{
         // If I don't want to change anything
-        const result = await Product.create(req.body);
+        const result = await createProductService(req.body);
         result.logger()
 
         // If I want to change any properties of the product
@@ -58,6 +62,25 @@ exports.createProduct = async(req, res, next) => {
     })
     }
     catch(error){
+        res.status(404).json({
+            status: 'Failed',
+            message: 'Something went wrong',
+            error: error.message
+        })
+    }
+}
+
+exports.updateProduct = async(req, res, next) => {
+    try {
+        const {id} = req.params;
+        const result = await updateProductService(id, req.body);
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Successfully updated product',
+            data: result
+        })
+    } catch (error) {
         res.status(404).json({
             status: 'Failed',
             message: 'Something went wrong',
