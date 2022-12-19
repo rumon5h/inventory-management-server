@@ -9,6 +9,8 @@ app.use(cors());
 
 // Schema => Model => Query 
 
+// Routes
+const productRoute = require('./routes/product.route');
 
 
 app.get('/', (req, res, next) => {
@@ -16,7 +18,6 @@ app.get('/', (req, res, next) => {
 })
 
 // Posting to database
-app.post('/api/v1/product', );
+app.use('/api/v1/product', productRoute);
 
-app.get('/api/v1/product', )
 module.exports = app;

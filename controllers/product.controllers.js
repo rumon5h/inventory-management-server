@@ -6,7 +6,7 @@ exports.getProducts = async(req,res, next) => {
         // const product = await Product.find({_id: '639feb8c48f4bf4c6e071b45'});
 
         // To get all products
-        // const products = await Product.find({});
+        const products = await Product.find({});
 
         // To get only in-stock products
         // const products = await Product.find({status: {$ne: 'out-of-stock'}});
