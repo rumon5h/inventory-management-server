@@ -8,11 +8,18 @@ const {
 } = require("../services/product.services");
 
 exports.getProducts = async (req, res, next) => {
+  // http://localhost:5000/api/v1/product?sort=-price,quantity&fields=name,description,price&price[gte]=13
+  
   try {
-    const filters = { ...req.query };
+    let filters = { ...req.query };
     const excludeField = ["sort", "page", "limit"];
 
     excludeField.forEach((field) => delete filters[field]);
+
+    // gt, lt, gte, lte 
+    let filtersString = JSON.stringify(filters);
+    filtersString = filtersString.replace(/\b(gt|lt|gte|lte)\b/g, match => `$${match}`)
+    filters= JSON.parse(filtersString);
 
     const queries = {};
 
