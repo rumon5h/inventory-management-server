@@ -9,7 +9,7 @@ const {
 
 exports.getProducts = async (req, res, next) => {
   // http://localhost:5000/api/v1/product?sort=-price,quantity&fields=name,description,price&price[gte]=13
-  
+
   try {
     let filters = { ...req.query };
     const excludeField = ["sort", "page", "limit"];
@@ -31,6 +31,14 @@ exports.getProducts = async (req, res, next) => {
     if(req.query.fields){
         const fields = req.query.fields.split(',').join(' ');
         queries.fields = fields;
+    }
+
+    // Pagination 
+    if(req.query.page){
+      const {page=1, limit=10} = req.query;
+      const skip = (page - 1) * parseInt(limit);
+      queries.skip = skip;
+      queries.limit = parseInt(limit);
     }
 
     // To get all products
