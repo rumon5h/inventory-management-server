@@ -11,7 +11,7 @@ app.use(cors());
 
 // Routes
 const productRoute = require('./routes/product.route');
-
+const brandRoute = require('./routes/brand.route');
 
 app.get('/', (req, res, next) => {
     res.send("Hello, world!");
@@ -19,5 +19,6 @@ app.get('/', (req, res, next) => {
 
 // Posting to database
 app.use('/api/v1/product', productRoute);
+app.use('/api/v1/brand', brandRoute);
 
 module.exports = app;

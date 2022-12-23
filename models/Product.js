@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require("validator");
+const {ObjectId} = mongoose.Schema.Types;
 
 // Schema design 
 const productSchema = mongoose.Schema({
@@ -45,7 +46,7 @@ const productSchema = mongoose.Schema({
         }
     }],
     category: {
-        typeof: String,
+        type: String,
         required: true
     },
     brand: {
