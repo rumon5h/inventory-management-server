@@ -83,7 +83,7 @@ exports.createProduct = async (req, res, next) => {
   }
 };
 
-exports.updateProduct = async (req, res, next) => {
+exports.updateProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const result = await updateProductService(id, req.body);
@@ -163,3 +163,4 @@ exports.bulkDeleteProducts = async (req, res, next) => {
     });
   }
 };
+

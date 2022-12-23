@@ -1,21 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const productController = require('../controllers/product.controllers');
+const productController = require("../controllers/product.controllers");
 
+router.route("/bulk-update").patch(productController.bulkUpdateProducts);
 
-router.route('/bulk-update').patch(productController.bulkUpdateProducts)
-router.route('/bulk-delete').delete(productController.bulkDeleteProducts)
+router.route("/bulk-delete").delete(productController.bulkDeleteProducts);
 
+router
+  .route("/")
+  .get(productController.getProducts)
+  .post(productController.createProduct);
 
-router.route('/')
-.get(productController.getProducts)
-.post(productController.createProduct)
-
-
-router.route('/:id').patch(productController.updateProduct)
-.delete(productController.deleteProductById)
-
-
-
+router
+  .route("/:id")
+  .patch(productController.updateProductById)
+  .delete(productController.deleteProductById);
 
 module.exports = router;
