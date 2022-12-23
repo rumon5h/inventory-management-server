@@ -5,3 +5,9 @@ exports.createBrandService = async (data) => {
 
   return result;
 };
+
+exports.getAllBrandService = async () => {
+  const result = await Brand.find({});
+
+  return result;
+}
