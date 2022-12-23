@@ -25,3 +25,9 @@ exports.updateBrandService = async (id, data) => {
 
   return result;
 }
+
+exports.deleteBrandByIdService = async (id) => {
+  const result = await Brand.deleteOne({ _id: id });
+
+  return result;
+}

@@ -1,4 +1,4 @@
-const { createBrandService, getAllBrandService, getBrandByIdService, updateBrandService } = require("../services/brand.services")
+const { createBrandService, getAllBrandService, getBrandByIdService, updateBrandService, deleteBrandByIdService } = require("../services/brand.services")
 
 exports.createBrand = async(req, res, next) => {
     try {
@@ -56,7 +56,7 @@ exports.getBrandById = async(req, res, next) => {
     }
 }
 
-exports.updateBrand = async (req, res, next) => {
+exports.updateBrandById = async (req, res, next) => {
     try {
         const {id} = req.params;
 
@@ -72,6 +72,25 @@ exports.updateBrand = async (req, res, next) => {
         res.status(400).json({
             status: 'Failed',
             message: 'Failed to update brand',
+            error: error.message
+        })
+    }
+}
+
+exports.deleteBrandById = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const result = await deleteBrandByIdService(id);
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Successfully deleted the brand',
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: 'Failed',
+            message: 'Failed to delete the brand',
             error: error.message
         })
     }
