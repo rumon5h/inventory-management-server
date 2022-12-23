@@ -17,3 +17,11 @@ exports.getBrandByIdService = async (brandId) => {
   
   return result;
 }
+
+exports.updateBrandService = async (id, data) => {
+  const result = await Brand.update({ _id: id }, data, {
+    runValidators: true
+  });
+
+  return result;
+}
