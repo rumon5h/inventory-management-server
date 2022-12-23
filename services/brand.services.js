@@ -11,3 +11,9 @@ exports.getAllBrandService = async () => {
 
   return result;
 }
+
+exports.getBrandByIdService = async (brandId) => {
+  const result = await Brand.findOne({ _id: brandId });
+  
+  return result;
+}

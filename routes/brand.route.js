@@ -7,5 +7,8 @@ router.route('/')
 .get(brandController.getAllBrand)
 
 
+router.route('/:id')
+.get(brandController.getBrandById)
+
 
 module.exports = router;
