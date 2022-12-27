@@ -63,7 +63,7 @@ exports.createProduct = async (req, res, next) => {
   try {
     // If I don't want to change anything
     const result = await createProductService(req.body);
-    result.logger();
+    // result.logger();
 
     // If I want to change any properties of the product
     // const product = await new Product(req.body);
