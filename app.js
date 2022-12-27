@@ -15,7 +15,7 @@ const brandRoute = require('./routes/brand.route');
 const categoriesRoute = require('./routes/category.route');
 const storeRoute = require('./routes/store.route');
 const stockRoute = require('./routes/stock.route');
-// const suppliersRoute = require('./routes/supplier.route');
+const suppliersRoute = require('./routes/supplier.route');
 // const userRoute = require('./routes/user.route');
 
 
