@@ -8,6 +8,9 @@ router
   .post(supplierController.createSupplier)
   .get(supplierController.getSuppliers);
 
-router.route("/:id").get(supplierController.getSupplierById);
+router
+  .route("/:id")
+  .get(supplierController.getSupplierById)
+  .patch(supplierController.updateSupplier);
 
 module.exports = router;

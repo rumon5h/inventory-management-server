@@ -2,6 +2,7 @@ const {
   createSupplierService,
   getSuppliersService,
   getSupplierByIdService,
+  updateSupplierService,
 } = require("../services/supplier.services");
 
 exports.createSupplier = async (req, res) => {
@@ -59,6 +60,33 @@ exports.getSupplierById = async (req, res, next) => {
     res.status(400).json({
       status: "failed",
       error: "Failed to get the brands",
+    });
+  }
+};
+
+exports.updateSupplier = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await updateSupplierService(id, req.body);
+
+    if (!result.nModified) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Couldn't update the supplier with this id",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully updated the supplier",
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      status: "failed",
+      message: "Failed to update the brand",
+      error: error.message
     });
   }
 };
