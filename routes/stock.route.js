@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const stockController = require('../controllers/stock.controller')
+const stockController = require('../controllers/stock.controllers')
 
 
 // router.route("/bulk-update").patch(stockController.bulkUpdateProduct);

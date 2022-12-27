@@ -1,5 +1,5 @@
 const Product = require("../models/Product")
-
+const Brand = require("../models/Brand");
 
 exports.getProductsService = async (filters, queries) => {
     const products = await Product
@@ -15,6 +15,13 @@ exports.getProductsService = async (filters, queries) => {
 
 exports.createProductService = async( data) => {
     const product = await Product.create(data);
+    const {_id: productId, brand} = product;
+
+    // Update the brand
+    const res = await Brand.updateOne(
+        {_id: brand._id}, {$push: {products: productId}}
+        );
+    console.log(res);
     return product;
 }
 

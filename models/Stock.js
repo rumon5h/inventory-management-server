@@ -16,7 +16,7 @@ const stockSchema = mongoose.Schema({
         unique: [true, 'Name must be unique.'],
         minLength: [3, 'Name must be at least 3 characters long'],
         maxLength: [150, 'Name is to large.'],
-        lowerCase: true
+        lowercase: true
     },
     description: {
         type: String,
@@ -53,16 +53,16 @@ const stockSchema = mongoose.Schema({
     price: {
         type: Number,
         required: true,
-        min: [o, "Price cannot be negative."]
+        min: [1, "Price cannot be negative."]
     },
     quantity: {
         type: Number,
         required: true,
-        min: [0, "Quantity cannot be negative."]
+        min: [1, "Quantity cannot be negative."]
     },
     category: {
-        typeof: String,
-        required: true
+        type: String,
+        required: [true, 'Category is required.']
     },
     brand: {
         name: {

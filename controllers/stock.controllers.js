@@ -1,8 +1,4 @@
-const {
-    getStocksService,
-    createStockService,
-    getStockByIdService
-  } = require("../services/stock.services");
+const { getStocksService, getStockByIdService, createStockService } = require("../services/stock.services");
   
   exports.getStocks = async (req, res, next) => {
     try {
@@ -99,7 +95,7 @@ const {
   
       res.status(200).json({
         status: "success",
-        messgae: "Stock created successfully!",
+        message: "Stock created successfully!",
         data: result,
       });
     } catch (error) {
