@@ -19,7 +19,7 @@ exports.createProductService = async( data) => {
 
     // Update the brand
     const res = await Brand.updateOne(
-        {_id: brand._id}, {$push: {products: productId}}
+        {_id: brand.id}, {$push: {products: productId}}
         );
     console.log(res);
     return product;

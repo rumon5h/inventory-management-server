@@ -27,7 +27,7 @@ app.get('/', (req, res, next) => {
 // Posting to database
 app.use('/api/v1/product', productRoute);
 app.use('/api/v1/brand', brandRoute);
-app.use('/api/v1/categories', categoriesRoute);
+app.use('/api/v1/category', categoriesRoute);
 app.use('/api/v1/store', storeRoute);
 app.use('/api/v1/stock', stockRoute);
 app.use('/api/v1/supplier', suppliersRoute);
