@@ -16,26 +16,29 @@ exports.getProducts = async (req, res, next) => {
 
     excludeField.forEach((field) => delete filters[field]);
 
-    // gt, lt, gte, lte 
+    // gt, lt, gte, lte
     let filtersString = JSON.stringify(filters);
-    filtersString = filtersString.replace(/\b(gt|lt|gte|lte)\b/g, match => `$${match}`)
-    filters= JSON.parse(filtersString);
+    filtersString = filtersString.replace(
+      /\b(gt|lt|gte|lte)\b/g,
+      (match) => `$${match}`
+    );
+    filters = JSON.parse(filtersString);
 
     const queries = {};
 
-    if(req.query.sort){
-        const sortBy = req.query.sort.split(',').join(' ');
-        queries.sortBy = sortBy;
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      queries.sortBy = sortBy;
     }
 
-    if(req.query.fields){
-        const fields = req.query.fields.split(',').join(' ');
-        queries.fields = fields;
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
     }
 
-    // Pagination 
-    if(req.query.page){
-      const {page=1, limit=10} = req.query;
+    // Pagination
+    if (req.query.page) {
+      const { page = 1, limit = 10 } = req.query;
       const skip = (page - 1) * parseInt(limit);
       queries.skip = skip;
       queries.limit = parseInt(limit);
@@ -63,8 +66,6 @@ exports.createProduct = async (req, res, next) => {
   try {
     // If I don't want to change anything
     const result = await createProductService(req.body);
-    // result.logger();
-
     // If I want to change any properties of the product
     // const product = await new Product(req.body);
     // const res = await product.save();
@@ -167,13 +168,12 @@ exports.bulkDeleteProducts = async (req, res, next) => {
 exports.fileUpload = async (req, res, next) => {
   // multiple image > req.files
   try {
-    
-    res.status(200).send(req.file)
+    res.status(200).send(req.file);
   } catch (error) {
-   res.status(400).json({
-    status: "Failed",
-    message: 'Something went wrong',
-    error: error.message
-   })
+    res.status(400).json({
+      status: "Failed",
+      message: "Something went wrong",
+      error: error.message,
+    });
   }
-}
+};

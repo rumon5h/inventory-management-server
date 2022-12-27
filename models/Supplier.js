@@ -52,7 +52,7 @@ const supplierSchema = mongoose.Schema(
     },
     tradeLicenseNumber: {
       type: Number,
-      required: [true, "Please provide your trade licence number"],
+      required: [true, "Please provide your trade license number"],
     },
     presentAddress: {
       type: String,
