@@ -3,14 +3,11 @@ const Stock = require("../models/Stock");
 const ObjectId = mongoose.Types.ObjectId;
 
 exports.getStocksService = async (filters, queries) => {
-
   // const stocks = await Stock.find(filters)
   //   .skip(queries.skip)
   //   .limit(queries.limit)
   //   .select(queries.fields)
   //   .sort(queries.sortBy)
-
-  console.log("hitting");
 
   const stocks = await Stock.find({});
 
@@ -19,7 +16,6 @@ exports.getStocksService = async (filters, queries) => {
 
   return { total, count: stocks.length, page, stocks };
 };
-
 
 exports.getStockByIdService = async (id) => {
   const stock = await Stock.findOne({ _id: id })
@@ -33,8 +29,6 @@ exports.createStockService = async (data) => {
   const stock = await Stock.create(data);
   return stock;
 };
-
-
 
 // exports.updateProductByIdService = async (productId, data) => {
 //   const result = await Stock.updateOne(
@@ -51,7 +45,6 @@ exports.createStockService = async (data) => {
 // };
 
 // exports.bulkUpdateProductService = async (data) => {
-//   // console.log(data.ids,data.data)
 //   // const result = await Product.updateMany({ _id: data.ids }, data.data, {
 //   //     runValidators: true
 //   // });
@@ -63,7 +56,6 @@ exports.createStockService = async (data) => {
 //   });
 
 //   const result = await Promise.all(products);
-//   console.log(result);
 
 //   return result;
 // };
@@ -78,4 +70,3 @@ exports.createStockService = async (data) => {
 
 //   return result;
 // };
-

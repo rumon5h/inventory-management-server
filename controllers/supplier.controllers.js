@@ -17,7 +17,8 @@ exports.createSupplier = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: "failed",
-      error: "Failed to create the supplier",
+      message: "Failed to create the supplier",
+      error: error.message,
     });
   }
 };
@@ -31,7 +32,6 @@ exports.getSuppliers = async (req, res, next) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       status: "failed",
       error: "Failed to get the suppliers",
@@ -56,7 +56,6 @@ exports.getSupplierById = async (req, res, next) => {
       data: supplier,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       status: "failed",
       error: "Failed to get the brands",
@@ -82,11 +81,10 @@ exports.updateSupplier = async (req, res, next) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       status: "failed",
       message: "Failed to update the brand",
-      error: error.message
+      error: error.message,
     });
   }
 };
