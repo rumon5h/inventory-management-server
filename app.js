@@ -30,7 +30,7 @@ app.use('/api/v1/brand', brandRoute);
 app.use('/api/v1/categories', categoriesRoute);
 app.use('/api/v1/store', storeRoute);
 app.use('/api/v1/stock', stockRoute);
-// app.use('/api/v1/supplier', suppliersRoute);
+app.use('/api/v1/supplier', suppliersRoute);
 // app.use('/api/v1/user', userRoute);
 
 module.exports = app;
