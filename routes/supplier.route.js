@@ -3,7 +3,9 @@ const supplierController = require("../controllers/supplier.controller");
 
 const router = express.Router();
 
-router.route("/")
+router
+  .route("/")
   .post(supplierController.createSupplier)
+  .get(supplierController.getSuppliers);
 
 module.exports = router;
