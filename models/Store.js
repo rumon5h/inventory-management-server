@@ -34,4 +34,4 @@ const storeSchema = mongoose.Schema({
 
 const Store = mongoose.model("Store", storeSchema);
 
-exports = Store;
+module.exports = Store;
