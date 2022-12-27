@@ -9,3 +9,8 @@ exports.getSuppliersService = async () => {
   const result = await Supplier.find({});
   return result;
 };
+
+exports.getSupplierByIdService = async (id) => {
+  const supplier = await Supplier.findOne({ _id: id });
+  return supplier;
+};
