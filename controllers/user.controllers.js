@@ -3,6 +3,7 @@ const {
   findUserByEmail,
   findUserByToken,
 } = require("../services/user.services");
+
 const { sendMailWithGmail, sendMailWithMailGun } = require("../utils/email");
 const { generateToken } = require("../utils/token");
 
@@ -30,8 +31,9 @@ exports.signup = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      status: "fail",
-      error,
+      status: "failed",
+      message: 'Something went wrong.',
+      error: error.message,
     });
   }
 };
@@ -53,8 +55,9 @@ exports.login = async (req, res) => {
 
     if (!email || !password) {
       return res.status(401).json({
-        status: "fail",
-        error: "Please provide your credentials",
+        status: "failed",
+        message: "Please provide your credentials",
+        error: error.message
       });
     }
 
@@ -62,8 +65,10 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        status: "fail",
-        error: "No user found. Please create an account",
+        status: "failed",
+        message: "No user found. Please create an account",
+        error: error.message
+
       });
     }
 
@@ -71,14 +76,14 @@ exports.login = async (req, res) => {
 
     if (!isPasswordValid) {
       return res.status(403).json({
-        status: "fail",
+        status: "failed",
         error: "Password is not correct",
       });
     }
 
     if (user.status != "active") {
       return res.status(401).json({
-        status: "fail",
+        status: "failed",
         error: "Your account is not active yet.",
       });
     }
@@ -97,8 +102,9 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      status: "fail",
-      error,
+      status: "failed",
+      message: 'Something went wrong.',
+      error: error.message,
     });
   }
 };
@@ -127,7 +133,7 @@ exports.confirmEmail = async (req, res) => {
 
     if (!user) {
       return res.status(403).json({
-        status: "fail",
+        status: "failed",
         error: "Invalid token",
       });
     }
@@ -136,7 +142,7 @@ exports.confirmEmail = async (req, res) => {
 
     if (expired) {
       return res.status(401).json({
-        status: "fail",
+        status: "failed",
         error: "Token expired",
       });
     }
@@ -153,8 +159,9 @@ exports.confirmEmail = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      status: "fail",
-      error,
+      status: "failed",
+      message: 'Something went wrong.',
+      error: error.message
     });
   }
 };

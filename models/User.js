@@ -76,6 +76,11 @@ const userSchema = mongoose.Schema(
       default: "inactive",
       enum: ["active", "inactive", "blocked"],
     },
+    // blueBadge:{
+    //   type: String,
+    //   enum: ["verified", "unverified"],
+    //   default: "unverified",
+    // },
 
     confirmationToken: String,
     confirmationTokenExpires: Date,
