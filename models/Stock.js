@@ -13,7 +13,6 @@ const stockSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide a name for this product'],
         trim: true,
-        unique: [true, 'Name must be unique.'],
         minLength: [3, 'Name must be at least 3 characters long'],
         maxLength: [150, 'Name is to large.'],
         lowercase: true
@@ -34,21 +33,7 @@ const stockSchema = mongoose.Schema({
     imageURLs:[{
         type: String,
         required: true,
-        validate: () => {
-            validator: (value) => {
-                if(!Array.isArray(value)){
-                    return false;
-                }
-                let isValid = true;
-                value.forEach(url => {
-                    if(!validator.isURL(url)){
-                        isValid = false;
-                    }
-                })
-                return isValid;
-            };
-            message: 'please provide valid image URLs'
-        }
+        validate: [validator.isURL, "Please provide a valid URL(s)"]
     }],
     price: {
         type: Number,
@@ -111,6 +96,11 @@ const stockSchema = mongoose.Schema({
             ref: 'Supplier',
             required: true
         }
+    },
+    sellCount: {
+        type: Number,
+        default: 0,
+        min: 0,
     }
 }, {
     timestamps: true
